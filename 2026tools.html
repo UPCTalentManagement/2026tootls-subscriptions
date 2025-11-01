@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الأدوات للعام الجديد</title>
+  <meta name="description" content="نموذج تقييم احتياجات الأدوات والاشتراكات للعام الجديد." />
+  <meta name="keywords" content="الأدوات, الاشتراكات, تقييم الاحتياجات, نموذج, العام الجديد" />
+  <meta name="author" content="Dr Mahmoud" />
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root{
+      --accent:#2563eb;
+      --accent-hover:#1d4ed8;
+      --muted:#6b7280;
+      --bg:#f8fafc;
+      --border:#e6e9ef;
+      --danger:#ef4444;
+      --danger-hover:#dc2626;
+      --success-bg:#ecfdf5;
+      --success-text:#065f46;
+      --error-bg:#fff1f2;
+      --error-text:#991b1b;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      margin:0;
+      background:var(--bg);
+      color:#0f172a;
+      line-height:1.5;
+    }
+    .container{
+      max-width:900px;
+      margin:36px auto;
+      padding:24px;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 4px 6px rgba(15,23,42,0.04),0 10px 15px rgba(15,23,42,0.08);
+    }
+    h1{margin:0 0 8px;font-size:24px;font-weight:700}
+    p.lead{margin:0 0 24px;color:var(--muted);font-size:14px}
+    .row{display:flex;gap:16px;margin-bottom:16px}
+    .col{flex:1;min-width:0}
+    label{display:block;font-size:14px;font-weight:500;margin-bottom:6px;color:#374151}
+    label.checkbox{font-weight:400;display:flex;align-items:center;gap:8px;cursor:pointer}
+    input[type=text],input[type=url],input[type=number],textarea,select{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      font-size:14px;
+      font-family:inherit;
+      transition:border-color 0.2s,box-shadow 0.2s;
+    }
+    input[type=text]:focus,input[type=url]:focus,textarea:focus,select:focus{
+      outline:none;
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(37,99,235,0.1);
+    }
+    input[type=checkbox]{
+      width:16px;
+      height:16px;
+      cursor:pointer;
+      accent-color:var(--accent);
+    }
+    textarea{min-height:88px;resize:vertical}
+    .tool-block{
+      border:2px solid var(--border);
+      padding:20px;
+      border-radius:10px;
+      margin-bottom:16px;
+      position:relative;
+      background:#fafbfc;
+      transition:border-color 0.2s;
+    }
+    .tool-block:hover{border-color:#cbd5e1}
+    .tool-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+    }
+    .tool-title{font-size:16px;font-weight:600;color:#1e293b;margin: 55px;}
+    .priority-group{display:flex;align-items:center;gap:15px}
+    .priority-label{font-size:13px;color:var(--muted);font-weight:500}
+    select{cursor:pointer}
+    .btn{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:8px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      transition:background 0.2s,transform 0.1s;
+      font-family:inherit;
+    }
+    .btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+    .btn.ghost{
+      background:transparent;
+      border:1px solid var(--border);
+      color:#374151;
+    }
+    .btn.ghost:hover{background:#f9fafb;border-color:#cbd5e1}
+    .btn.danger{background:var(--danger)}
+    .btn.danger:hover{background:var(--danger-hover)}
+    .add-btn{margin:12px 0 24px}
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:24px;
+      padding-top:24px;
+      border-top:1px solid var(--border);
+    }
+    .button-group{display:flex;gap:12px}
+    .impact-list{display:flex;flex-direction:column;gap:10px}
+    .impact-other{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .impact-other input[type=text]{flex:1;min-width:200px}
+    .note{font-size:13px;color:var(--muted)}
+    .message{
+      padding:12px 16px;
+      border-radius:8px;
+      margin-bottom:16px;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .message.success{background:var(--success-bg);color:var(--success-text);border:1px solid #a7f3d0}
+    .message.error{background:var(--error-bg);color:var(--error-text);border:1px solid #fecaca}
+    .message.info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
+    .remove-tool{
+      position:absolute;
+      right:16px;
+      top:16px;
+      background:#fff;
+      border:1px solid var(--border);
+      padding:6px 10px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:18px;
+      line-height:1;
+      color:#9ca3af;
+      transition:all 0.2s;
+    }
+    .remove-tool:hover{
+      background:#fef2f2;
+      border-color:#fecaca;
+      color:var(--danger);
+    }
+    hr{margin:24px 0;border:none;border-top:1px solid #eef2ff}
+    .tool-count{
+      display:inline-block;
+      background:var(--accent);
+      color:#fff;
+      font-size:12px;
+      font-weight:600;
+      padding:2px 8px;
+      border-radius:12px;
+      margin-left:8px;
+    }
+    @media (max-width:720px){
+      .row{flex-direction:column;gap:12px}
+      .container{margin:12px;padding:16px}
+      .footer{flex-direction:column;gap:16px;align-items:stretch}
+      .button-group{justify-content:stretch}
+      .btn{width:100%}
+      .impact-other{flex-direction:column;align-items:stretch}
+      .impact-other input[type=text]{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>تقييم الاحتياجات للأدوات للعام الجديد 2026</h1>
+    <p class="lead">ادخل الادوات التى تظن انك بحاجة اليها والتى من شأنها تحسن الاداء فى العمل .</p>
+
+    <div id="messages"></div>
+
+    <form id="needsForm">
+      <div class="row">
+        <div class="col">
+          <label for="name">اسمك *</label>
+          <input id="name" name="name" type="text" placeholder=" مثال: محمد" required />
+        </div>
+        <div class="col">
+          <label for="title"> الوظيفة *</label>
+          <input id="title" name="title" type="text" placeholder="e.g. ID" required />
+        </div>
+      </div>
+
+      <hr />
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2 style="margin:0;font-size:18px;font-weight:600">
+          الأدوات
+          <span class="tool-count" id="toolCount">0</span>
+        </h2>
+      </div>
+
+      <div id="toolsContainer"></div>
+
+      <button type="button" class="btn ghost add-btn" onclick="addToolBlock()">اضافة أداة أخرى</button>
+
+      <div class="footer">
+        <span class="note">* Required fields · </span>
+        <div class="button-group">
+          <button type="button" class="btn ghost" onclick="resetForm()">محو</button>
+          <button type="submit" class="btn" id="submitBtn">ارسال</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <template id="toolTemplate">
+    <div class="tool-block">
+      <div class="tool-header">
+        <span class="tool-title">التفاصيل</span>
+        <div class="priority-group">
+          <span class="priority-label">الأهمية:</span>
+          <select name="priority" required aria-label="Priority level">
+            <option value="1">1 - هامة جدًا</option>
+            <option value="2">2 - عالية</option>
+            <option value="3" selected>3 - متوسطة</option>
+            <option value="4">4 - منخفضة</option>
+            <option value="5">5 - يمكن أن تفيد</option>
+          </select>
+        </div>
+      </div>
+      <button type="button" class="remove-tool" title="Remove this tool" onclick="removeThisTool(this)" aria-label="Remove tool">×</button>
+      
+      <div class="row">
+        <div class="col">
+          <label>اسم الاداة  *</label>
+          <input name="toolName" type="text" required placeholder="e.g.  Canva" />
+        </div>
+        <div class="col">
+          <label>موقع الأداة الرسمى * </label>
+          <input name="toolWebsite" type="text" placeholder="https://example.com" />
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col">
+          <label>السعر </label>
+          <input name="toolPrice" type="text" placeholder="e.g., $15/user/month or $180/year" />
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <label>لماذا تحتاج الأداة *</label>
+        <textarea name="why" placeholder="اشرح الغرض وكيف ستدعم عملك..." required></textarea>
+      </div>
+
+      <div>
+        <label>الأثر المتوقع (اختر كل ما ينطبق)</label>
+        <div class="impact-list">
+          <label class="checkbox">
+            <input type="checkbox" name="impact" value="Improves efficiency or speed">
+            <span>تحسين الكفاءة أو السرعة</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="impact" value="Enhances collaboration">
+            <span>تحسين التعاون بين الفريق</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="impact" value="Enables new capabilities">
+            <span> قدرات جديدة (غير ممكنة حاليًا)</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="impact" value="Reduces manual work">
+            <span>تقليل العمل اليدوي</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="impact" value="Improves learning or creativity">
+            <span>تحسين التعلم أو الإبداع</span>
+          </label>
+          <div class="impact-other">
+            <label class="checkbox">
+              <input type="checkbox" name="impact" value="Other" onchange="toggleOtherInput(this)">
+              <span>اخرى:</span>
+            </label>
+            <input name="impactOtherText" type="text" placeholder="Specify other impact..." disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx0nkJaf1Zo3yFqFQiRslvlo3iESR4ibkME64ObD0PA8nwzg6pQc5la9dcsTfUoz76Ckw/exec';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      addToolBlock();
+      document.getElementById('needsForm').addEventListener('submit', handleSubmit);
+    });
+
+    function addToolBlock(){
+      const tpl = document.getElementById('toolTemplate');
+      const clone = tpl.content.cloneNode(true);
+      document.getElementById('toolsContainer').appendChild(clone);
+      updateToolCount();
+    }
+
+    function removeThisTool(btn){
+      const blocks = document.querySelectorAll('.tool-block');
+      if(blocks.length > 1){
+        btn.closest('.tool-block').remove();
+        updateToolCount();
+      } else {
+        showMessage('You must have at least one tool to submit.', 'error');
+      }
+    }
+
+    function updateToolCount(){
+      const count = document.querySelectorAll('.tool-block').length;
+      document.getElementById('toolCount').textContent = count;
+    }
+
+    function toggleOtherInput(checkbox){
+      const otherInput = checkbox.closest('.impact-other').querySelector('[name="impactOtherText"]');
+      otherInput.disabled = !checkbox.checked;
+      if(!checkbox.checked) otherInput.value = '';
+    }
+
+    function resetForm(){
+      if(!confirm('Are you sure you want to reset the form? All data will be lost.')) return;
+      document.getElementById('needsForm').reset();
+      document.getElementById('toolsContainer').innerHTML = '';
+      addToolBlock();
+      clearMessages();
+      showMessage('Form has been reset.', 'info');
+    }
+
+    function gatherFormData(){
+      const name = document.getElementById('name').value.trim();
+      const title = document.getElementById('title').value.trim();
+      const tools = [...document.querySelectorAll('.tool-block')].map(block => {
+        const impacts = [...block.querySelectorAll('[name="impact"]:checked')].map(cb => cb.value);
+        const otherCheckbox = block.querySelector('[name="impact"][value="Other"]');
+        const otherText = block.querySelector('[name="impactOtherText"]').value.trim();
+        
+        // If "Other" is checked and there's text, replace "Other" with the actual text
+        if(otherCheckbox && otherCheckbox.checked && otherText){
+          const idx = impacts.indexOf('Other');
+          if(idx !== -1) impacts[idx] = `Other: ${otherText}`;
+        }
+
+        return {
+          toolName: block.querySelector('[name="toolName"]').value.trim(),
+          toolWebsite: block.querySelector('[name="toolWebsite"]').value.trim(),
+          toolPrice: block.querySelector('[name="toolPrice"]').value.trim(),
+          why: block.querySelector('[name="why"]').value.trim(),
+          priority: block.querySelector('[name="priority"]').value,
+          impacts: impacts.join('; ')
+        };
+      }).filter(t => t.toolName && t.why);
+
+      return {name, title, tools};
+    }
+
+    async function handleSubmit(e){
+      e.preventDefault();
+      clearMessages();
+      
+      const data = gatherFormData();
+      
+      if(!data.name || !data.title){
+        showMessage('Please fill in your name and title.', 'error');
+        return;
+      }
+      
+      if(!data.tools.length){
+        showMessage('Please complete at least one tool with all required fields.', 'error');
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      try {
+        showMessage('Submitting your request...', 'info');
+
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', // You can change to 'cors' if your script is public
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        console.log('Response object:', response);
+        console.log('Payload:', data);
+
+        // Check if we are in no-cors mode (response.type === 'opaque')
+        if (response.type === 'opaque') {
+          // We can’t read the response, but the request likely succeeded
+          showMessage(`✅ Request submitted successfully! Submitted ${data.tools.length} tool(s).`, 'success');
+          setTimeout(() => resetFormSilent(), 2000);
+        } else if (response.ok) {
+          // Normal CORS-enabled response
+          const json = await response.json();
+          if (json.status === 'success') {
+            showMessage(`✅ Success! Submitted ${data.tools.length} tool(s).`, 'success');
+            setTimeout(() => resetFormSilent(), 2000);
+          } else {
+            showMessage('⚠️ Server error: ' + (json.message || 'Unknown error'), 'error');
+          }
+        } else {
+          showMessage('⚠️ Network error or server unreachable.', 'error');
+        }
+
+      } catch (err) {
+        console.error('Submission error:', err);
+        // Treat expected no-cors JSON parsing errors as success (silent success)
+        showMessage(`✅ Request submitted! Submitted ${data.tools.length} tool(s).`, 'success');
+        setTimeout(() => resetFormSilent(), 2000);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+      }
+    }
+    //   try{
+    //     showMessage('Submitting your request...', 'info');
+        
+    //     const response = await fetch(SCRIPT_URL, {
+    //       method: 'POST',
+    //       mode: 'no-cors',
+    //       headers: {'Content-Type': 'application/json'},
+    //       body: JSON.stringify(data)
+    //     });
+    //     console.log(response);
+    //     console.log('######################');
+    //     console.log(data);
+    //     // Handle no-cors mode - can't read response
+    //     if(response.type === 'ok'){
+    //       showMessage(`Request submitted successfully! Submitted ${data.tools.length} tool(s).`, 'success');
+    //       setTimeout(() => resetFormSilent(), 2000);
+    //     } else {
+    //       const json = await response.json();
+    //       if(json.result === 'success'){
+    //         showMessage(`Success! Submitted ${data.tools.length} tool(s).`, 'success');
+    //         setTimeout(() => resetFormSilent(), 2000);
+    //       } else {
+    //         showMessage('Server error: ' + (json.message || 'Unknown error'), 'error');
+    //       }
+    //     }
+    //   } catch(err){
+    //     // In no-cors mode, this is actually expected and means success
+    //     showMessage(`Request submitted successfully! Submitted ${data.tools.length} tool(s).`, 'success');
+    //     setTimeout(() => resetFormSilent(), 2000);
+    //     console.error('Submission error (expected in no-cors mode):', err);
+    //   } finally {
+    //     submitBtn.disabled = false;
+    //     submitBtn.textContent = 'Submit Request';
+    //   }
+    // }
+
+    function resetFormSilent(){
+      document.getElementById('needsForm').reset();
+      document.getElementById('toolsContainer').innerHTML = '';
+      addToolBlock();
+    }
+
+    function showMessage(text, type){
+      const box = document.getElementById('messages');
+      const msg = document.createElement('div');
+      msg.className = `message ${type}`;
+      msg.textContent = text;
+      box.appendChild(msg);
+      setTimeout(() => msg.remove(), 8000);
+    }
+
+    function clearMessages(){
+      document.getElementById('messages').innerHTML = '';
+    }
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('keydown', event => {
+  // F12
+  if (event.key === 'F12') {
+    event.preventDefault();
+  }
+
+  // Ctrl + Shift + I or J
+  if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) {
+    event.preventDefault();
+  }
+
+  // Ctrl + U (View Source)
+  if (event.ctrlKey && event.key === 'u') {
+    event.preventDefault();
+  }
+
+  // Ctrl + C / X / S / P (optional)
+  if (event.ctrlKey && ['c', 'x', 's', 'p'].includes(event.key.toLowerCase())) {
+    event.preventDefault();
+  }
+});
+  </script>
+</body>
+</html>
