@@ -181,33 +181,32 @@
     <h1>تقييم الاحتياجات للأدوات للعام الجديد 2026</h1>
     <p class="lead">ادخل الادوات التى تظن انك بحاجة اليها والتى من شأنها تحسن الاداء فى العمل .</p>
 
-    <div id="messages"></div>
-
+    
     <form id="needsForm">
       <div class="row">
         <div class="col">
           <label for="name">اسمك *</label>
-          <input id="name" name="name" type="text" placeholder=" مثال: محمد" required />
+          <input id="name" name="name" type="text" placeholder=" مثال: محمد أحمد" required />
         </div>
         <div class="col">
           <label for="title"> الوظيفة *</label>
           <input id="title" name="title" type="text" placeholder="e.g. ID" required />
         </div>
       </div>
-
+      
       <hr />
-
+      
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
         <h2 style="margin:0;font-size:18px;font-weight:600">
           الأدوات
           <span class="tool-count" id="toolCount">0</span>
         </h2>
       </div>
-
+      
       <div id="toolsContainer"></div>
-
+      
       <button type="button" class="btn ghost add-btn" onclick="addToolBlock()">اضافة أداة أخرى</button>
-
+      
       <div class="footer">
         <span class="note">* Required fields · </span>
         <div class="button-group">
@@ -215,9 +214,10 @@
           <button type="submit" class="btn" id="submitBtn">ارسال</button>
         </div>
       </div>
+      <div id="messages"></div>
     </form>
   </div>
-
+  
   <template id="toolTemplate">
     <div class="tool-block">
       <div class="tool-header">
@@ -225,11 +225,11 @@
         <div class="priority-group">
           <span class="priority-label">الأهمية:</span>
           <select name="priority" required aria-label="Priority level">
-            <option value="1">1 - هامة جدًا</option>
-            <option value="2">2 - عالية</option>
+            <option value="1">5 - هامة جدًا</option>
+            <option value="2">4 - عالية</option>
             <option value="3" selected>3 - متوسطة</option>
-            <option value="4">4 - منخفضة</option>
-            <option value="5">5 - يمكن أن تفيد</option>
+            <option value="4">2 - منخفضة</option>
+            <option value="5">1 - يمكن أن تفيد</option>
           </select>
         </div>
       </div>
@@ -252,12 +252,12 @@
           <input name="toolPrice" type="text" placeholder="e.g., $15/user/month or $180/year" />
         </div>
       </div>
-
+      
       <div style="margin-bottom:16px">
         <label>لماذا تحتاج الأداة *</label>
         <textarea name="why" placeholder="اشرح الغرض وكيف ستدعم عملك..." required></textarea>
       </div>
-
+      
       <div>
         <label>الأثر المتوقع (اختر كل ما ينطبق)</label>
         <div class="impact-list">
@@ -292,7 +292,7 @@
       </div>
     </div>
   </template>
-
+  
   <script>
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx0nkJaf1Zo3yFqFQiRslvlo3iESR4ibkME64ObD0PA8nwzg6pQc5la9dcsTfUoz76Ckw/exec';
 
